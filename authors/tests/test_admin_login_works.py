@@ -13,14 +13,14 @@ class CheckAdminLoginTestCase(TestCase):
         }
 
 
-    def test_admin_login_works(self):
-        """
-        Create an admin user and check to see if json response contains that data
-        """
-        self.setUp()
+    # def test_admin_login_works(self):
+    #     """
+    #     Create an admin user and check to see if json response contains that data
+    #     """
+    #     self.setUp()
        
-        request = self.client.post("/authors/user/", self.form_data) 
-        return self.assertEqual(request.status_code, status.HTTP_200_OK)
+    #     request = self.client.post("/authors/user/", self.form_data) 
+    #     return self.assertEqual(request.status_code, status.HTTP_200_OK)
 
     def test_user_can_retrieve_user_data(self):
         """
@@ -28,7 +28,7 @@ class CheckAdminLoginTestCase(TestCase):
         """
         self.setUp()
 
-        request = self.client.get("/authors/user/", self.form_data)   
+        request = self.client.get("/authors/users/")   
         return self.assertEqual(request.status_code, status.HTTP_200_OK) 
     
 
@@ -36,7 +36,12 @@ class CheckAdminLoginTestCase(TestCase):
         """
         Test that only authenticated users can update their details
         """
-        self.setUp
-        request = self.client.post("/authors/user/", self.form_data)
+        self.setUp()
+        request = self.client.post("/authors/users/", self.form_data)
         return self.assertEqual(request.status_code, status.HTTP_200_OK)
-        
+    
+    def test_login_works(self):
+        # self.setUp()
+
+        request = self.client.post("/authors/users/login/", self.form_data)
+        return self.assertEqual(request.status_code, status.HTTP_200_OK)
