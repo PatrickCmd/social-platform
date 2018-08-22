@@ -39,3 +39,4 @@ class CheckAdminLoginTestCase(TestCase):
         self.setUp
         request = self.client.post("/authors/user/", self.form_data)
         return self.assertEqual(request.status_code, status.HTTP_200_OK)
+        
