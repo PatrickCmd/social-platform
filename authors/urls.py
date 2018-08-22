@@ -51,7 +51,10 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/echo/$', EchoView.as_view()),
     
+    # author urls
     path('authors/', include('authors.apps.authentication.urls')), 
+    
+    # admin urls
     path('admin/', admin.site.urls),
     # url(r'^api/', include('authors.apps.authentication.urls', namespace='authentication')),
 ]

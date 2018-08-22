@@ -1,0 +1,1 @@
+from authors.apps.authentication.apps import AuthenticationConfig
