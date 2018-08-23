@@ -9,9 +9,8 @@ env:
   - CC_TEST_REPORTER_ID=6d3379169de0e2a1a780f93c8f0545849b6227531f6f891b3da576b1ff24624c
 
 language: python
-python: 3.7
-dist: xenial
-sudo: true
+python: "3.6"
+      env: TOXENV=py35-django200
 
 install:
     - pip install -r requirements.txt
@@ -22,7 +21,6 @@ before_script:
   - ./cc-test-reporter before-build
 
 script:
-  - python manage.py runserver
   - coverage run manage.py test
 
 after_script:
