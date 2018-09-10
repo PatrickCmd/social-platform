@@ -1,7 +1,7 @@
 
 |:---|:---|:---|:---|
 
-A Social platform for the creative at heart.
+A Social platform.
 =======
 
 ## Vision
