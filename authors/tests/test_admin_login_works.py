@@ -26,7 +26,6 @@ class CheckAdminLoginTestCase(TestCase):
         """
         Test the UserRetrieveUpdateView works for only authenticated users
         """
-        self.setUp()
 
         request = self.client.get("/authors/users/")   
         return self.assertEqual(request.status_code, status.HTTP_200_OK) 
@@ -36,7 +35,6 @@ class CheckAdminLoginTestCase(TestCase):
         """
         Test that only authenticated users can update their details
         """
-        self.setUp()
         request = self.client.post("/authors/users/", self.form_data)
         return self.assertEqual(request.status_code, status.HTTP_200_OK)
     
