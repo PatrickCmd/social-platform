@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import include, url
-from django.urls import path
+from django.urls import path, re_path
 from django.contrib import admin
 from django.views import generic
 
@@ -39,20 +39,20 @@ class EchoView(views.APIView):
 
 
 urlpatterns = [
-    url(r'^$', generic.RedirectView.as_view(
+    re_path(r'^$', generic.RedirectView.as_view(
         url='/api/', permanent=False
     )),
-    url(r'^api/$', get_schema_view()),
-    url(r'^api/auth/', include(
+    re_path(r'^api/$', get_schema_view()),
+    re_path(r'^api/auth/', include(
         'rest_framework.urls', namespace='rest_framework'
     )),
-    url(r'^api/auth/token/obtain/$', TokenObtainPairView.as_view()),
-    url(r'^api/auth/token/refress/$', TokenRefreshView.as_view()),
-    url(r'^admin/', admin.site.urls),
-    url(r'^api/echo/$', EchoView.as_view()),
+    re_path(r'^api/auth/token/obtain/$', TokenObtainPairView.as_view()),
+    re_path(r'^api/auth/token/refress/$', TokenRefreshView.as_view()),
+    # url(r'^admin/', admin.site.urls),
+    re_path(r'^api/echo/$', EchoView.as_view()),
     
     # author urls
-    path('authors/', include('authors.apps.authentication.urls')), 
+    path('authors/', include('authors.apps.authentication.urls')),
     
     # admin urls
     path('admin/', admin.site.urls),
