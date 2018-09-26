@@ -1,0 +1,19 @@
+language: python
+python:
+  - "3.6"
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database test_db;' -U postgres
+  - python manage.py makemigrations
+  - python manage.py migrate
+install:
+  - pipenv install
+  - pipenv install coverage
+  - pipenv install coveralls
+script:
+  - coverage run --source=authors/ manage.py test
+  - coverage report -m
+  - coveralls
+after_success:
+  - coveralls
