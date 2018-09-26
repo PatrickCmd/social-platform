@@ -39,6 +39,9 @@ wrapt = "==1.10.11"
 Django = "==2.1"
 django-extensions = "*"
 werkzeug = "*"
+python-decouple = "*"
+dj-database-url = "*"
+gunicorn = "*"
 
 [dev-packages]
 
