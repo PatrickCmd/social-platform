@@ -31,9 +31,7 @@ schema_view = get_schema_view(title="Social Platform API")
 
 
 urlpatterns = [
-    re_path(r'^$', generic.RedirectView.as_view(
-        url='/api/', permanent=False
-    )),
+    path('', generic.RedirectView.as_view(url='/docs', permanent=False)),
     
     # authentication urls
     path('api/', include(('authors.apps.authentication.urls', 'authentication'),
@@ -46,7 +44,7 @@ urlpatterns = [
     re_path(r'^api-auth/', include('rest_framework.urls')),
     
     # documentation urls
-    path(r'api_docs', schema_swagger_view),
-    path(r'docs', include_docs_urls(title='Social Platform API', permission_classes=[])),
-    path(r'schema', schema_view),
+    path('api_docs', schema_swagger_view),
+    path('docs', include_docs_urls(title='Social Platform API', permission_classes=[])),
+    path('schema', schema_view),
 ]

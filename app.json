@@ -3,11 +3,18 @@
   "scripts": {
   },
   "env": {
+    "ALLOWED_HOSTS": ".herokuapp.com",
+    "APP_SETTINGS": "production",
+    "DEBUG": "FALSE",
+    "DISABLE_COLLECTSTATIC": "1",
+    "SECRET_KEY": {
+      "generator": "secret"
+    }
   },
   "formation": {
   },
   "addons": [
-
+    "heroku-postgresql"
   ],
   "buildpacks": [
 
