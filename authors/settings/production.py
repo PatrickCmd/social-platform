@@ -1,3 +1,5 @@
+import django_heroku
+
 from .base import *
 
 import dj_database_url
