@@ -38,7 +38,7 @@ urlpatterns = [
          namespace='authentication')),
     
     # admin urls
-    path('admin/', admin.site.urls),
+    path('admin', admin.site.urls),
 
     # rest_framework urls for session authentication for the browsable api
     re_path(r'^api-auth/', include('rest_framework.urls')),

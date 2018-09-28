@@ -43,6 +43,7 @@ dj-database-url = "*"
 gunicorn = "*"
 "psycopg2-binary" = "*"
 django-rest-swagger = "*"
+django-heroku = "*"
 
 [dev-packages]
 
