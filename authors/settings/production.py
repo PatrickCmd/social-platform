@@ -10,3 +10,5 @@ DEBUG = config('DEBUG', cast=bool)
 
 import django_heroku
 django_heroku.settings(locals(), test_runner=False)
+
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
