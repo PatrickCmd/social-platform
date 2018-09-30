@@ -17,7 +17,8 @@ class RegistrationAPIView(APIView):
     serializer_class = RegistrationSerializer
 
     def post(self, request):
-        user = request.data.get('user', {})
+        print(request.data)
+        user = request.data
 
         # The create serializer, validate serializer, save serializer pattern
         # below is common and you will see it a lot throughout this course and
@@ -35,7 +36,7 @@ class LoginAPIView(APIView):
     serializer_class = LoginSerializer
 
     def post(self, request):
-        user = request.data.get('user', {})
+        user = request.data
 
         # Notice here that we do not call `serializer.save()` like we did for
         # the registration endpoint. This is because we don't actually have
@@ -61,7 +62,7 @@ class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def update(self, request, *args, **kwargs):
-        serializer_data = request.data.get('user', {})
+        serializer_data = request.data
 
         # Here is that serialize, validate, save pattern we talked about
         # before.

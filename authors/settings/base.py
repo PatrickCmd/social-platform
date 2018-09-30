@@ -39,6 +39,8 @@ INSTALLED_APPS = [
 
     # 'corsheaders',
     'rest_framework',
+    'rest_framework_swagger',
+    # project applications
     'authors.apps.authentication',
     'authors.apps.core',
     'authors.apps.profiles',
@@ -81,11 +83,11 @@ WSGI_APPLICATION = 'authors.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT'),
+        'NAME': config('DB_NAME', default='database_name'),
+        'USER': config('DB_USER', default='database_user'),
+        'PASSWORD': config('DB_PASSWORD',  default='password'),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default=5342, cast=int),
     }
 }
 
@@ -137,8 +139,8 @@ CORS_ORIGIN_WHITELIST = (
 AUTH_USER_MODEL = 'authentication.User'
 
 REST_FRAMEWORK = {
-    # 'EXCEPTION_HANDLER': 'authors.apps.core.exceptions.core_exception_handler',
-    # 'NON_FIELD_ERRORS_KEY': 'error',
+    'EXCEPTION_HANDLER': 'authors.apps.core.exceptions.core_exception_handler',
+    'NON_FIELD_ERRORS_KEY': 'error',
 
     # # Added the default permisison classes - Ephraim
     # # 'DEFAULT_PERMISSION_CLASSES':(
@@ -154,7 +156,8 @@ REST_FRAMEWORK = {
     ),
 
     'DEFAULT_AUTHENTICATED_CLASSES':(
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'authors.apps.authentication.backends.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
     ),
 }

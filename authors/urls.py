@@ -13,49 +13,38 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import include, url
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from django.contrib import admin
 from django.views import generic
 
 from rest_framework import views, serializers, status
 from rest_framework.response import Response
+from rest_framework.documentation import include_docs_urls
 from rest_framework.schemas import get_schema_view
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-)
+from rest_framework_swagger.views import get_swagger_view
 
-class MessageSerializer(serializers.Serializer):
-    message = serializers.CharField()
 
-class EchoView(views.APIView):
-    def post(self, request, *args, **kwargs):
-        serializer = MessageSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        return Response(
-            serializer.data, status=status.HTTP_201_CREATED
-        )
+# swagger documentation
+schema_swagger_view = get_swagger_view(title='Social Platform API')
+# coreapi documentation
+schema_view = get_schema_view(title="Social Platform API")
 
 
 urlpatterns = [
-    re_path(r'^$', generic.RedirectView.as_view(
-        url='/api/', permanent=False
-    )),
-    re_path(r'^api/$', get_schema_view()),
-    re_path(r'^api/auth/', include(
-        'rest_framework.urls', namespace='rest_framework'
-    )),
-    re_path(r'^api/auth/token/obtain/$', TokenObtainPairView.as_view()),
-    re_path(r'^api/auth/token/refress/$', TokenRefreshView.as_view()),
-    # url(r'^admin/', admin.site.urls),
-    re_path(r'^api/echo/$', EchoView.as_view()),
+    path('', generic.RedirectView.as_view(url='/docs', permanent=False)),
     
-    # author urls
-    path('authors/', include('authors.apps.authentication.urls')),
+    # authentication urls
+    path('api/', include(('authors.apps.authentication.urls', 'authentication'),
+         namespace='authentication')),
     
     # admin urls
-    path('admin/', admin.site.urls),
-    # url(r'^api/', include('authors.apps.authentication.urls', namespace='authentication')),
-]
+    path('admin', admin.site.urls),
 
+    # rest_framework urls for session authentication for the browsable api
+    re_path(r'^api-auth/', include('rest_framework.urls')),
+    
+    # documentation urls
+    path('api_docs', schema_swagger_view),
+    path('docs', include_docs_urls(title='Social Platform API', permission_classes=[])),
+    path('schema', schema_view),
+]

@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/PatrickCmd/social-platform.svg?branch=develop)](https://travis-ci.org/PatrickCmd/social-platform)
 [![Coverage Status](https://coveralls.io/repos/github/PatrickCmd/social-platform/badge.svg?branch=develop)](https://coveralls.io/github/PatrickCmd/social-platform?branch=develop)
-|:---|:---|:---|:---|
 
 A Social platform.
 =======

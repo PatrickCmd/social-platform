@@ -8,6 +8,7 @@ before_script:
   - python manage.py makemigrations
   - python manage.py migrate
 install:
+  - pip install pipenv
   - pipenv install
   - pipenv install coverage
   - pipenv install coveralls
