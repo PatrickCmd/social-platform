@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/PatrickCmd/social-platform.svg?branch=develop)](https://travis-ci.org/PatrickCmd/social-platform)
 [![Coverage Status](https://coveralls.io/repos/github/PatrickCmd/social-platform/badge.svg?branch=develop)](https://coveralls.io/github/PatrickCmd/social-platform?branch=develop)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e5f5ba63255b07965331/maintainability)](https://codeclimate.com/github/PatrickCmd/social-platform/maintainability)
 
 A Social platform.
 =======

@@ -6,7 +6,6 @@
     "ALLOWED_HOSTS": ".herokuapp.com",
     "APP_SETTINGS": "production",
     "DEBUG": "False",
-    "DISABLE_COLLECTSTATIC": "1",
     "SECRET_KEY": {
       "generator": "secret"
     }
