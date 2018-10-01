@@ -17,7 +17,6 @@ class RegistrationAPIView(APIView):
     serializer_class = RegistrationSerializer
 
     def post(self, request):
-        print(request.data)
         user = request.data
 
         # The create serializer, validate serializer, save serializer pattern
