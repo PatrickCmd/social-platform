@@ -1,3 +1,6 @@
+from allauth.account.adapter import get_adapter
+from allauth.account.models import EmailAddress
+from allauth.account.utils import setup_user_email
 from django.contrib.auth import authenticate
 
 from rest_framework import serializers
@@ -26,9 +29,29 @@ class RegistrationSerializer(serializers.ModelSerializer):
         # or response, including fields specified explicitly above.
         fields = ['email', 'username', 'password', 'token']
 
-    def create(self, validated_data):
-        # Use the `create_user` method we wrote earlier to create a new user.
-        return User.objects.create_user(**validated_data)
+    # def create(self, validated_data):
+    #     # Use the `create_user` method we wrote earlier to create a new user.
+    #     return User.objects.create_user(**validated_data)
+    
+    def custom_signup(self, request, user):
+        pass
+
+    def get_cleaned_data(self, validated_data):
+        # return {
+        #     'username': self.validated_data.get('username', ''),
+        #     'password1': self.validated_data.get('password1', ''),
+        #     'email': self.validated_data.get('email', '')
+        # }
+        return validated_data
+
+    def save(self, request, validated_data):
+        adapter = get_adapter()
+        self.cleaned_data = self.get_cleaned_data(validated_data)
+        user = User.objects.create_user(**validated_data) #adapter.new_user(request)
+        # adapter.save_user(request, user, self)
+        self.custom_signup(request, user)
+        setup_user_email(request, user, [])
+        return user
 
 
 class LoginSerializer(serializers.Serializer):
@@ -72,6 +95,11 @@ class LoginSerializer(serializers.Serializer):
         if user is None:
             raise serializers.ValidationError(
                 'A user with this email and password was not found.'
+            )
+        
+        if not EmailAddress.objects.get(email=user.email).verified:
+            raise serializers.ValidationError(
+                'Please verify your account before logging in'
             )
 
         # Django provides a flag on our `User` model called `is_active`. The

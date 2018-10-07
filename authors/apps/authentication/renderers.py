@@ -28,6 +28,9 @@ class UserJSONRenderer(JSONRenderer):
             # bytes.
             data['token'] = token.decode('utf-8')
         # Finally, we can render our data under the "user" namespace.
-        return json.dumps({
-            'user': data
-        })
+        if data.get('user'):
+            return json.dumps(data)
+        else:
+            return json.dumps({
+                'user': data
+            })

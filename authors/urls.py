@@ -34,8 +34,7 @@ urlpatterns = [
     path('', generic.RedirectView.as_view(url='/docs', permanent=False)),
     
     # authentication urls
-    path('api/', include(('authors.apps.authentication.urls', 'authentication'),
-         namespace='authentication')),
+    path('api/', include('authors.apps.authentication.urls')),
     
     # admin urls
     path('admin', admin.site.urls),
