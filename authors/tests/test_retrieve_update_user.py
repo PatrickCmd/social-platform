@@ -11,7 +11,7 @@ class TestUserRegistration(BaseTestCase):
         """
         self.uri = "/api/user/";
         self.client.login(email="test@test.com", password="test12345")
-        self.set_authorization_headers(reverse('authentication:login'))
+        self.set_authorization_headers(reverse('login'))
         response = self.client.get(self.uri, format="json")
         self.assertEqual(response.status_code, 200,
                          'Expected Response Code 200, received {0} instead.'

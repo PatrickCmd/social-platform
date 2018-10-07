@@ -36,9 +36,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # 'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.twitter',
     'rest_framework_swagger',
     # project applications
     'authors.apps.authentication',
@@ -152,3 +161,23 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ),
 }
+
+REST_USE_JWT = True
+
+REST_AUTH_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'authors.apps.authentication.serializers.RegistrationSerializer',
+    'LOGIN_SERIALIZER': 'authors.apps.authentication.serializers.LoginSerializer',
+}
+
+SWAGGER_SETTINGS = {
+    'LOGIN_URL': 'login',
+    # 'LOGOUT_URL': 'logout',
+}
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+SITE_ID = 1
