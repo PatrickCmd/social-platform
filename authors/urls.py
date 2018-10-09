@@ -38,6 +38,9 @@ urlpatterns = [
 
     # profile urls
     path('api/', include('authors.apps.profiles.urls')),
+
+    # article urls
+    path('api/', include('authors.apps.articles.urls')),
     
     # admin urls
     path('admin', admin.site.urls),
