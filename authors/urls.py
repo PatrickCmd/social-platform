@@ -35,6 +35,9 @@ urlpatterns = [
     
     # authentication urls
     path('api/', include('authors.apps.authentication.urls')),
+
+    # profile urls
+    path('api/', include('authors.apps.profiles.urls')),
     
     # admin urls
     path('admin', admin.site.urls),
