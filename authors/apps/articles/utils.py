@@ -17,7 +17,10 @@ def unique_slug(instance, new_slug=None):
     if new_slug is not None:
         slug = new_slug
     else:
-        slug = slugify(instance.title)
+        if hasattr(instance, 'title'):
+            slug = slugify(instance.title)
+        elif hasattr(instance, 'name'):
+            slug = slugify(instance.name)
     
     obj = instance.__class__
     qs_exists = obj.objects.filter(slug=slug).exists()

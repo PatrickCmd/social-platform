@@ -37,10 +37,12 @@ urlpatterns = [
     path('api/', include('authors.apps.authentication.urls')),
 
     # profile urls
-    path('api/', include('authors.apps.profiles.urls')),
+    path('api/', include('authors.apps.profiles.urls',
+                         namespace='profiles')),
 
     # article urls
-    path('api/', include('authors.apps.articles.urls')),
+    path('api/', include('authors.apps.articles.urls',
+                         namespace='articles')),
     
     # admin urls
     path('admin', admin.site.urls),
