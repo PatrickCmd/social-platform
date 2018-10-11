@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.twitter',
     'rest_framework_swagger',
+    'taggit',
+    'taggit_serializer',
     # project applications
     'authors.apps.authentication',
     'authors.apps.core',
@@ -182,3 +184,5 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 
 SITE_ID = 1
+
+TAGGIT_CASE_INSENSITIVE = True
